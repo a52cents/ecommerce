@@ -1,0 +1,43 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model produit {
+  id              Int               @id @default(autoincrement())
+  nom             String            @db.VarChar(255)
+  prix            Int
+  commandeproduit commandeproduit[]
+}
+
+model utilisateur {
+  id       Int        @id @default(autoincrement())
+  mail     String     @db.VarChar(255)
+  password String     @db.VarChar(255)
+  role     String     @default("user") @db.VarChar(255)
+  commande commande[]
+}
+
+model commande {
+  id              Int               @id @default(autoincrement())
+  utilisateurId   Int
+  date            DateTime          @default(now())
+  utilisateur     utilisateur       @relation(fields: [utilisateurId], references: [id])
+  commandeproduit commandeproduit[]
+
+  @@index([utilisateurId], map: "commande_utilisateurId_fkey")
+}
+
+model commandeproduit {
+  commandeId Int
+  produitId  Int
+  commande   commande @relation(fields: [commandeId], references: [id], map: "commandeProduit_commandeId_fkey")
+  produit    produit  @relation(fields: [produitId], references: [id], map: "commandeProduit_produitId_fkey")
+
+  @@id([commandeId, produitId])
+  @@index([produitId], map: "commandeProduit_produitId_fkey")
+}
