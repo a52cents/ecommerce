@@ -24,5 +24,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Generate Prisma Client
+        run: pnpm exec prisma generate
+
       - name: Run unit tests
         run: pnpm test tests/produit.unit.test.cjs tests/commande.unit.test.cjs
