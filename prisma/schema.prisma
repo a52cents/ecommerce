@@ -1,25 +1,25 @@
 generator client {
   provider      = "prisma-client-js"
-  binaryTargets = ["native", "debian-openssl-3.0.x"]
+  binaryTargets = ["native"]
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model produit {
   id              Int               @id @default(autoincrement())
-  nom             String            @db.VarChar(255)
+  nom             String
   prix            Int
   commandeproduit commandeproduit[]
 }
 
 model utilisateur {
   id       Int        @id @default(autoincrement())
-  mail     String     @db.VarChar(255)
-  password String     @db.VarChar(255)
-  role     String     @default("user") @db.VarChar(255)
+  mail     String
+  password String
+  role     String     @default("user")
   commande commande[]
 }
 
@@ -30,15 +30,15 @@ model commande {
   utilisateur     utilisateur       @relation(fields: [utilisateurId], references: [id])
   commandeproduit commandeproduit[]
 
-  @@index([utilisateurId], map: "commande_utilisateurId_fkey")
+  @@index([utilisateurId])
 }
 
 model commandeproduit {
   commandeId Int
   produitId  Int
-  commande   commande @relation(fields: [commandeId], references: [id], map: "commandeProduit_commandeId_fkey")
-  produit    produit  @relation(fields: [produitId], references: [id], map: "commandeProduit_produitId_fkey")
+  commande   commande @relation(fields: [commandeId], references: [id])
+  produit    produit  @relation(fields: [produitId], references: [id])
 
   @@id([commandeId, produitId])
-  @@index([produitId], map: "commandeProduit_produitId_fkey")
+  @@index([produitId])
 }
