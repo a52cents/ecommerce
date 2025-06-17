@@ -1,15 +1,14 @@
-import { prisma } from "../services/db.js";
+const { prisma } = require("../services/db.js");
 
-export const commandeRepository = {
-    getCommandes: async (page,limit) => {
-        const commandes = prisma.commande.findMany({
-            skip:(page - 1) * limit,
-            take:limit
+exports.commandeRepository = {
+    getCommandes: async (page, limit) => {
+        return prisma.commande.findMany({
+            skip: (page - 1) * limit,
+            take: limit
         });
-        return commandes;
     },
     getCommande: async (id) => {
-        const commande = prisma.commande.findUnique({
+        const commande = await prisma.commande.findUnique({
             where: { id: id }
         });
         if (!commande) {
@@ -18,28 +17,24 @@ export const commandeRepository = {
         return commande;
     },
     createCommande: async (commande) => {
-        const newCommande = prisma.commande.create({
+        return prisma.commande.create({
             data: commande
         });
-        return newCommande;
     },
-    editCommande: async (id,commande) => {
-        const updatedCommande = prisma.commande.update({
+    editCommande: async (id, commande) => {
+        return prisma.commande.update({
             where: { id: id },
             data: commande
         });
-        return updatedCommande;
     },
     deleteCommande: async (id) => {
-        const deletedCommande = prisma.commande.delete({
+        return prisma.commande.delete({
             where: { id: id }
         });
-        return deletedCommande;
     },
     getCommandesByUserId: async (userId) => {
-        const commandes = prisma.commande.findMany({
+        return prisma.commande.findMany({
             where: { utilisateurId: userId }
         });
-        return commandes;
     }
-}
+};
