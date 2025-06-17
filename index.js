@@ -50,7 +50,7 @@ registerAuthRoutes(fastify);
 registerPostRoutes(fastify);
 
 try {
-    await fastify.listen({ port: 3000 });
+    await fastify.listen({ port: process.env.PORT || 3000, host: '0.0.0.0' });
     fastify.log.info(`Server listening on ${fastify.server.address().port}`);
     await fastify.ready();
 } catch (err) {
