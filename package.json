@@ -29,5 +29,8 @@
     "jest-mock": "^30.0.0",
     "prisma": "^5.22.0",
     "supertest": "^7.1.1"
+  },
+  "prisma": {
+    "seed": "node ./prisma/seed.js"
   }
 }

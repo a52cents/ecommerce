@@ -3,6 +3,8 @@ export const PublicUserDto = {
     properties: {
         id: { type: "number" },
         mail: { type: "string" },
+        role: { type: "string" },
+        token: { type: "string" }
     }
 }
 
@@ -49,6 +51,7 @@ export const GetUserByMailPwdDto = {
             properties: {
                 id: { type: "number" },
                 mail: { type: "string" },
+                role: { type: "string" },
                 token: { type: "string" }
             }
         }

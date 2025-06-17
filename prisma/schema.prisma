@@ -17,7 +17,7 @@ model produit {
 
 model utilisateur {
   id       Int        @id @default(autoincrement())
-  mail     String
+  mail     String     @unique
   password String
   role     String     @default("user")
   commande commande[]
@@ -34,11 +34,12 @@ model commande {
 }
 
 model commandeproduit {
+  id         Int      @id @default(autoincrement())
   commandeId Int
   produitId  Int
+  quantite   Int      @default(1) // Ajout du champ quantité avec valeur par défaut
   commande   commande @relation(fields: [commandeId], references: [id])
   produit    produit  @relation(fields: [produitId], references: [id])
 
-  @@id([commandeId, produitId])
   @@index([produitId])
 }

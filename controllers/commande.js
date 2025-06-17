@@ -19,16 +19,17 @@ export function registerCommandeRoutes(fastify) {
                 commandeproduit: {
                     create: produits.map(produit => ({
                         produitId: produit.id,
-                        quantite: produit.quantite
+                        quantite: 1 // quantité de base 1 pour chaque produit envoyé
                     }))
                 }
             });
             reply.code(201).send(commande);
         } catch (err) {
+            console.error('Erreur création commande:', err); // LOG SERVEUR
             reply.code(500).send({ message: err.message });
         }
     });
-    fastify.get("/commandes", { preHandler: fastify.auth([fastify.authUser]),schema:listCommandeDto }, async (request, reply) => {
+    fastify.get("/commandes", { preHandler: fastify.auth([fastify.authUser]), schema: listCommandeDto }, async (request, reply) => {
         try {
             const userId = request.user.id;
             const commandes = await commandeRepository.getCommandesByUserId(userId);

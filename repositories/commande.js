@@ -34,7 +34,12 @@ export const commandeRepository = {
     },
     getCommandesByUserId: async (userId) => {
         return prisma.commande.findMany({
-            where: { utilisateurId: userId }
+            where: { utilisateurId: userId },
+            include: {
+                commandeproduit: {
+                    include: { produit: true }
+                }
+            }
         });
     }
 };

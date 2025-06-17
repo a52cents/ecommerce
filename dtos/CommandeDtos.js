@@ -45,13 +45,22 @@ export const listCommandeDto = {
                 type: "object",
                 properties: {
                     id: { type: "number" },
-                    id_client: { type: "number" },
-                    produits: {
+                    utilisateurId: { type: "number" },
+                    commandeproduit: {
                         type: "array",
                         items: {
                             type: "object",
                             properties: {
-                                id_produit: { type: "number" }
+                                produitId: { type: "number" },
+                                quantite: { type: "number" },
+                                produit: {
+                                    type: "object",
+                                    properties: {
+                                        id: { type: "number" },
+                                        nom: { type: "string" },
+                                        prix: { type: "number" }
+                                    }
+                                }
                             }
                         }
                     }
