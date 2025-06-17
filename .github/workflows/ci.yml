@@ -28,4 +28,4 @@ jobs:
         run: pnpm exec prisma generate
 
       - name: Run unit tests
-        run: pnpm test tests/produit.unit.test.cjs tests/commande.unit.test.cjs
+        run: pnpm test tests/produit.unit.test.js tests/commande.unit.test.js
