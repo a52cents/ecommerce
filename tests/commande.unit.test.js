@@ -1,4 +1,5 @@
-const { commandeRepository } = require("../repositories/commande.js");
+import { jest, describe, test, expect } from '@jest/globals';
+import { commandeRepository } from "../repositories/commande.js";
 
 describe("commandeRepository", () => {
     test("getCommandes retourne un tableau (mock)", async () => {

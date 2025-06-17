@@ -1,6 +1,6 @@
-const { prisma } = require("../services/db.js");
+import { prisma } from "../services/db.js";
 
-exports.commandeRepository = {
+export const commandeRepository = {
     getCommandes: async (page, limit) => {
         return prisma.commande.findMany({
             skip: (page - 1) * limit,

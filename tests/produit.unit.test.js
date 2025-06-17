@@ -1,3 +1,4 @@
+import { jest, describe, test, expect } from '@jest/globals';
 import { produitRepository } from "../repositories/produit.js";
 
 describe("produitRepository", () => {
@@ -13,9 +14,7 @@ describe("produitRepository", () => {
     });
 
     test("getProduct lève une erreur si non trouvé (mock)", async () => {
-        produitRepository.getProduct = jest.fn().mockImplementation(() => {
-            throw new Error("Product not found");
-        });
+        produitRepository.getProduct = jest.fn().mockRejectedValue(new Error("Product not found"));
         await expect(produitRepository.getProduct(999)).rejects.toThrow("Product not found");
     });
 });

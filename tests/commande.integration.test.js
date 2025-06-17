@@ -1,10 +1,9 @@
-const { commandeRepository } = require("../repositories/commande.js");
-const { prisma } = require("../services/db.js");
+import { commandeRepository } from "../repositories/commande.js";
+import { prisma } from "../services/db.js";
 
 describe("commandeRepository (integration)", () => {
     let user;
     beforeAll(async () => {
-        // Crée un utilisateur de test (clé étrangère obligatoire)
         user = await prisma.utilisateur.create({
             data: { mail: "test@commande.com", password: "1234", role: "user" }
         });
