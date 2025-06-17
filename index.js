@@ -54,10 +54,10 @@ registerPostRoutes(fastify);
 
 // Serve index.html at '/'
 fastify.get('/', async (request, reply) => {
-    const __filename = fileURLToPath(import.meta.url);
-    const __dirname = path.dirname(__filename);
-    const html = await readFile(path.join(__dirname, 'index.html'), 'utf-8');
-    reply.type('text/html').send(html);
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
+  const html = await readFile(path.join(__dirname, 'index.html'), 'utf-8');
+  reply.type('text/html').send(html);
 });
 
 try {
