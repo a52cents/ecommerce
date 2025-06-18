@@ -11,6 +11,7 @@ import { registerCommandeRoutes } from "./controllers/commande.js";
 import { readFile } from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import fastifyStatic from '@fastify/static';
 
 const fastify = Fastify({ logger: true });
 
@@ -58,6 +59,15 @@ fastify.get('/', async (request, reply) => {
   const __dirname = path.dirname(__filename);
   const html = await readFile(path.join(__dirname, 'index.html'), 'utf-8');
   reply.type('text/html').send(html);
+});
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Serve static files from the root directory
+await fastify.register(fastifyStatic, {
+  root: __dirname,
+  prefix: '/', // allows access to /style.css
 });
 
 try {

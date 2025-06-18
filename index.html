@@ -5,255 +5,8 @@
     <meta charset="UTF-8">
     <title>Accueil - eCommerce API</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: linear-gradient(120deg, #f8fafc 0%, #e0e7ff 100%);
-            min-height: 100vh;
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 2rem 3vw 1rem 3vw;
-            background: #fff;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-        }
-
-        .logo {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #2d3a4a;
-            letter-spacing: 1px;
-        }
-
-        .header-actions {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
-
-        .doc-btn,
-        .account-btn {
-            padding: 0.7rem 1.5rem;
-            background: #6366f1;
-            color: #fff;
-            border: none;
-            border-radius: 6px;
-            font-size: 1rem;
-            cursor: pointer;
-            text-decoration: none;
-            transition: background 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .doc-btn:hover,
-        .account-btn:hover {
-            background: #4338ca;
-        }
-
-        .account-icon {
-            width: 22px;
-            height: 22px;
-            vertical-align: middle;
-        }
-
-        main {
-            max-width: 900px;
-            margin: 2rem auto;
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.07);
-            padding: 2rem 2vw 3rem 2vw;
-        }
-
-        h1 {
-            text-align: center;
-            color: #2d3a4a;
-            margin-bottom: 0.5rem;
-        }
-
-        .subtitle {
-            text-align: center;
-            color: #6366f1;
-            margin-bottom: 2.5rem;
-            font-size: 1.2rem;
-        }
-
-        .products {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 2rem;
-        }
-
-        .product-card {
-            background: #f1f5f9;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-            padding: 1.5rem 1rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transition: box-shadow 0.2s, transform 0.2s;
-        }
-
-        .product-card:hover {
-            box-shadow: 0 6px 24px rgba(99, 102, 241, 0.13);
-            transform: translateY(-4px) scale(1.03);
-        }
-
-        .product-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #374151;
-            margin-bottom: 0.5rem;
-        }
-
-        .product-price {
-            color: #6366f1;
-            font-size: 1.1rem;
-            font-weight: 500;
-        }
-
-        .section-title {
-            margin-top: 3rem;
-            font-size: 1.3rem;
-            color: #2d3a4a;
-            font-weight: 600;
-            text-align: center;
-        }
-
-        .orders {
-            margin-top: 2rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .order-card {
-            background: #e0e7ff;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.07);
-            padding: 1.2rem 1rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .order-title {
-            font-weight: 600;
-            color: #4338ca;
-        }
-
-        .order-items {
-            font-size: 0.98rem;
-            color: #374151;
-        }
-
-        .order-total {
-            color: #6366f1;
-            font-weight: 500;
-        }
-
-        .auth-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(44, 62, 80, 0.18);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-        }
-
-        .auth-box {
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 8px 32px rgba(99, 102, 241, 0.13);
-            padding: 2.5rem 2rem 2rem 2rem;
-            min-width: 320px;
-            max-width: 95vw;
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-            position: relative;
-        }
-
-        .auth-box h2 {
-            margin: 0 0 1rem 0;
-            color: #6366f1;
-            text-align: center;
-        }
-
-        .auth-box label {
-            font-size: 1rem;
-            color: #2d3a4a;
-            margin-bottom: 0.2rem;
-        }
-
-        .auth-box input {
-            padding: 0.7rem 1rem;
-            border: 1px solid #c7d2fe;
-            border-radius: 6px;
-            font-size: 1rem;
-            margin-bottom: 0.7rem;
-        }
-
-        .auth-box button {
-            background: #6366f1;
-            color: #fff;
-            border: none;
-            border-radius: 6px;
-            font-size: 1rem;
-            padding: 0.7rem 1.5rem;
-            cursor: pointer;
-            margin-top: 0.5rem;
-        }
-
-        .auth-box button:hover {
-            background: #4338ca;
-        }
-
-        .auth-switch {
-            text-align: center;
-            color: #6366f1;
-            cursor: pointer;
-            font-size: 0.98rem;
-            margin-top: 0.5rem;
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: #6366f1;
-            cursor: pointer;
-        }
-
-        @media (max-width: 600px) {
-            main {
-                padding: 1rem 0.5rem;
-            }
-
-            header {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .auth-box {
-                padding: 1.2rem 0.5rem 1rem 0.5rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="./style.css">
+    <!-- Le CSS a été déplacé dans style.css -->
 </head>
 
 <body>
@@ -279,6 +32,11 @@
         <button id="openProductModal"
             style="display:none;margin:0 auto 2rem 0;padding:0.8rem 2rem;font-size:1.1rem;background:#10b981;color:#fff;border:none;border-radius:8px;cursor:pointer;">Créer
             un produit</button>
+        <div class="main-details">
+            Cette application e-commerce vous permet de consulter les produits, passer des commandes, et gérer le
+            catalogue (admin).<br>
+            Connectez-vous pour accéder à toutes les fonctionnalités !
+        </div>
         <div id="products" class="products"></div>
         <div class="section-title">Mes commandes</div>
         <div id="orders" class="orders"></div>
@@ -416,10 +174,11 @@
 
         accountBtn.onclick = () => {
             if (isLoggedIn) {
-                // Afficher infos compte ou déconnexion
+                // Afficher déconnexion
                 if (confirm('Se déconnecter ?')) {
                     setLoggedInState(false);
                     userToken = null;
+                    userRole = null;
                     accountBtnText.textContent = 'Se connecter';
                     fetchOrders();
                 }
@@ -450,7 +209,7 @@
                     console.log('Réponse signup:', data); // DEBUG
                     userToken = data.token;
                     setLoggedInState(true, data.role || null);
-                    accountBtnText.textContent = 'Mon compte';
+                    accountBtnText.textContent = 'Se déconnecter';
                     closeModal();
                     fetchOrders();
                 } catch (err) {
@@ -594,15 +353,21 @@
             };
         };
 
-        function setLoggedInState(state, role = null) {
-            isLoggedIn = state;
+        function setLoggedInState(logged, role = null) {
+            isLoggedIn = logged;
             userRole = role;
+            if (isLoggedIn) {
+                accountBtnText.textContent = 'Se déconnecter';
+            } else {
+                accountBtnText.textContent = 'Se connecter';
+            }
             showOrderBtn();
-            showProductBtn();
-        }
-        function showProductBtn() {
-            const btn = document.getElementById('openProductModal');
-            btn.style.display = (isLoggedIn && userRole === 'admin') ? 'block' : 'none';
+            if (userRole === 'admin') {
+                document.getElementById('openProductModal').style.display = 'block';
+            } else {
+                document.getElementById('openProductModal').style.display = 'none';
+            }
+            fetchOrders();
         }
 
         // Afficher/Masquer le bouton commande selon connexion
