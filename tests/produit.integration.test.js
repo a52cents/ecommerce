@@ -3,7 +3,6 @@ import { prisma } from "../services/db.js";
 
 describe("produitRepository (integration)", () => {
     beforeAll(async () => {
-        // Nettoyage de la table produit (si possible)
         await prisma.produit.deleteMany();
     });
 

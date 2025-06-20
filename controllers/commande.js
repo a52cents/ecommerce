@@ -38,4 +38,14 @@ export function registerCommandeRoutes(fastify) {
             reply.code(500).send({ message: err.message });
         }
     });
+    fastify.delete("/commandes/:id", { preHandler: fastify.auth([fastify.authAdmin]) }, async (request, reply) => {
+        try {
+            const commandeId = parseInt(request.params.id, 10);
+            await commandeRepository.deleteCommande(commandeId);
+            reply.code(204).send();
+        } catch (err) {
+            console.error('Erreur suppression commande:', err); // LOG SERVEUR
+            reply.code(500).send({ message: err.message });
+        }
+    });
 }

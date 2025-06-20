@@ -3,7 +3,6 @@ import { produitRepository } from "../repositories/produit.js";
 
 describe("produitRepository", () => {
     test("getProducts retourne un tableau (mock)", async () => {
-        // On mock la méthode findMany de prisma
         produitRepository.getProducts = jest.fn().mockResolvedValue([
             { id: 1, nom: "Produit 1" },
             { id: 2, nom: "Produit 2" }

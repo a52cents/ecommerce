@@ -6,7 +6,6 @@
     <title>Accueil - eCommerce API</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
-    <!-- Le CSS a été déplacé dans style.css -->
 </head>
 
 <body>
@@ -194,7 +193,6 @@
         authForm.onsubmit = async (e) => {
             e.preventDefault();
             authError.textContent = '';
-            // Utiliser 'mail' pour l'API, pas 'email'
             const mail = authForm.email.value;
             const password = authForm.password.value;
             if (isSignup) {
@@ -206,7 +204,6 @@
                     });
                     if (!res.ok) throw new Error('Erreur API');
                     const data = await res.json();
-                    console.log('Réponse signup:', data); // DEBUG
                     userToken = data.token;
                     setLoggedInState(true, data.role || null);
                     accountBtnText.textContent = 'Se déconnecter';
